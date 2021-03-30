@@ -26,7 +26,8 @@ object AppMain {
       // Create an Actor system
       val system = ActorSystem("ClusterSystem", setupClusterNodeConfig(port))
 
-      AkkaManagement(system).start();
+      AkkaManagement(system).start()
+      HttpServer(system).start()
 
       system.actorOf(Props[ClusterListenerActor], "clusterListener")
 

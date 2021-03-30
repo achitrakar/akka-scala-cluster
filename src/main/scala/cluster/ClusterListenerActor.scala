@@ -43,10 +43,21 @@ class ClusterListenerActor extends Actor with ActorLogging {
       }
     }
 
+    val unreachableMembers: Set[Member] = currentClusterState.getUnreachable.toSet
+
     currentClusterState.getMembers.zip(Stream from 1).foreach{
-      case (member, counter) => log.info("{} {}{}{}", counter, leader(member), oldest(member), member)
-        def leader(member: Member): String = if (member.address.equals(currentClusterState.getLeader)) "(LEADER)" else ""
-        def oldest(member: Member): String = if (oldestMember.equals(member)) "(OLDEST)" else ""
+      case (member, counter) =>
+        log.info(
+          s"${getClass.getSimpleName} - $counter ${leader(member)} ${oldest(member)} ${unreachable(member)} $member"
+        )
+        def leader(member: Member): String = if (member.address.equals(currentClusterState.getLeader)) "(LEADER) " else ""
+        def oldest(member: Member): String = if (oldestMember.equals(member)) "(OLDEST) " else ""
+        def unreachable(member: Member): String = if (unreachableMembers.contains(member)) "(UNREACHABLE) " else ""
+    }
+
+    unreachableMembers.zip(Stream from 1).foreach{
+      case (member, counter) =>
+        log.info(s"${getClass.getSimpleName} - $counter $member (unreachable)")
     }
   }
 }

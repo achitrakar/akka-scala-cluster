@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Use this script to stop all of the cluster nodes started with the start-cluster script.
+
+scriptPath=$(dirname "$0")
+
+echo "Stop all cluster nodes running on ports 2551 through 2559"
+
+stopNode() {
+  node=$1
+  $scriptPath/node-stop $node
+}
+
+for i in $(seq 9) ; do stopNode $i ; done
