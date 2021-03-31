@@ -3,10 +3,11 @@
 helpCluster() {
   echo "Use the cluster command to start, stop, and view the status of Akka cluster nodes."
   echo
-  echo "./akka cluster [start N | stop | status]"
-  echo "./akka cluster start N   # Starts one or more cluster nodes as specified by N, which must be 1-9."
-  echo "./akka cluster stop"     # Stops all concurrently cluster nodes."
-  echo "./akka cluster status"   # Shows an Akka Management view of the cluster status/state."
+  echo "./akka cluster [start N | stop | status | dashboard [N]]"
+  echo "./akka cluster start N         # Starts one or more cluster nodes as specified by N, which must be 1-9."
+  echo "./akka cluster stop"           # Stops all concurrently cluster nodes."
+  echo "./akka cluster status"         # Shows an Akka Management view of the cluster status/state."
+  echo "./akka cluster dashboard [N]"  # Opens an Akka cluster dashboard web page hosted on the specified [N] or default 1, which must be 1-9.
 }
 
 helpNode() {
@@ -44,7 +45,12 @@ clusterCommand() {
     "status")
       $scriptPath/cluster-status
       ;;
+    "dashboard")
+      $scriptPath/cluster-dashboard $argument
+      ;;
     *)
+      echo "Invalid subcommand '$command'" 
+      echo
       helpCluster
       ;;
   esac

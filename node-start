@@ -21,7 +21,7 @@ startNode() {
   port="255"$node
   akka_management_http_port="855"$node
   dashboard_port="955"$node
-  echo "Start node $1 on port $port, management port $akka_management_http_port, dashboard $dashboard_port"
+  echo "Start node $1 on port $port, management port $akka_management_http_port, HTTP port $dashboard_port"
   mkdir -p $logPath
   sbt "runMain cluster.AppMain $port" >> $logPath/$scriptFilename-$node.log &
 }

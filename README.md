@@ -3,7 +3,7 @@
 ### Introduction
 This is a Scala, Akka project that demonstrates how to setup a basic [Akka Cluster](https://doc.akka.io/docs/akka/current/index-cluster.html).
 
-This project is simply the scala version of [akka-java-cluster](https://github.com/mckeeh3/akka-java-cluster).
+This project is simply the scala version of [akka-java-cluster](https://github.com/mckeeh3/akka-java-cluster) and/or [akka-typed-java-cluster](https://github.com/mckeeh3/akka-typed-java-cluster).
 
 
 ### The ClusterListenerActor Actor
@@ -19,3 +19,4 @@ The ClusterListenerActor provides a simple view of cluster activity. Here is an 
 ```
 
 ### Run a cluster (Mac, Linux)
+
